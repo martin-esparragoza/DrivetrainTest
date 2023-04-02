@@ -1,0 +1,43 @@
+package org.firstinspires.ftc.teamcode.opmodes.tests;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.libswerve.differential.SwerveModule;
+
+class TestSwerveModule extends SwerveModule {
+    public TestSwerveModule(DcMotor right, DcMotor left) {
+        super(right, left);
+        left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    @Override
+    public double getAngle() {
+        return (((right.getCurrentPosition() / 537.6) * (2 * Math.PI)) + ((left.getCurrentPosition() / 537.6) * (2 * Math.PI))) / (90.0 / 32.0) / 2;
+    }
+}
+
+@Autonomous(name = "Swerve Angle Test", group = "tests")
+public class SwerveAngleTest extends LinearOpMode {
+    private SwerveModule m1;
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+        m1 = new TestSwerveModule(
+            hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
+            hardwareMap.get(DcMotor.class, "dswerve_m1_0")
+        );
+
+        waitForStart();
+        while (opModeIsActive()) {
+            m1.setPowers(0, 0.5);
+            System.out.println(Math.toDegrees(m1.getAngle()));
+            sleep(100);
+            idle();
+        }
+    }
+}
