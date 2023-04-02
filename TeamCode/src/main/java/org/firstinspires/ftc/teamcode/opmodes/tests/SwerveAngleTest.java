@@ -4,15 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.libswerve.differential.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
 
-class TestSwerveModule extends SwerveModule {
+class TestSwerveModule extends DiffySwerveModule {
     public TestSwerveModule(DcMotor right, DcMotor left) {
         super(right, left);
-        left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     @Override

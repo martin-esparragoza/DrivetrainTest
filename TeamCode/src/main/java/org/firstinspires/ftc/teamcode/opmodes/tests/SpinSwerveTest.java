@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.opmodes.tests;
 
-import android.provider.Settings;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.libswerve.differential.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
 
 @Autonomous(name = "Spin Swerve Test", group = "tests")
 public class SpinSwerveTest extends LinearOpMode {
@@ -23,7 +22,7 @@ public class SpinSwerveTest extends LinearOpMode {
         left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        SwerveModule module = new SwerveModule(right, left) {
+        SwerveModule module = new DiffySwerveModule(right, left) {
             @Override
             public double getAngle() {
                 return 0;

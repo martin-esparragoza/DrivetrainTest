@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.libswerve.differential.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
 import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 
 @TeleOp(name = "Diffy TeleOp", group = "teleop")

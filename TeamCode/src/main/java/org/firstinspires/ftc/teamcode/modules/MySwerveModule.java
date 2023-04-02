@@ -3,9 +3,11 @@ package org.firstinspires.ftc.teamcode.modules;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.libswerve.differential.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
 
-public class MySwerveModule extends SwerveModule {
+// TODO
+public class MySwerveModule extends DiffySwerveModule {
     private final AnalogInput encoder;
 
     public MySwerveModule(DcMotor right, DcMotor left, AnalogInput encoder) {

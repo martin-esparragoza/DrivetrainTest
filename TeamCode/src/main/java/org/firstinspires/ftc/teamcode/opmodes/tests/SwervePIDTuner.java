@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.libswerve.Util;
-import org.firstinspires.ftc.teamcode.libswerve.differential.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
 
 @Config
 @Autonomous(name = "Swerve PID Tuner", group = "tests")
@@ -37,10 +37,9 @@ public class SwervePIDTuner extends LinearOpMode {
             telemetry.addData("Leftpwr:", dswerve_m1_0.getPower());
             telemetry.update();
 
-            /*m1.setTargetAngle(angle);
+            m1.setTargetAngle(angle);
 
-            m1.update();*/
-            m1.setPowers(0, fwd);
+            m1.update();
         }
     }
 }
