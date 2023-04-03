@@ -8,8 +8,8 @@ import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
 import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
 
 class TestSwerveModule extends DiffySwerveModule {
-    public TestSwerveModule(DcMotor right, DcMotor left) {
-        super(right, left);
+    public TestSwerveModule(double x, double y, DcMotor right, DcMotor left) {
+        super(x, y, right, left);
     }
 
     @Override
@@ -25,6 +25,7 @@ public class SwerveAngleTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         m1 = new TestSwerveModule(
+            0, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );

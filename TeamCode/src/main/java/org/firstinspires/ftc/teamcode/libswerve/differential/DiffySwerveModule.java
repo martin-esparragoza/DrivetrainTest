@@ -8,7 +8,8 @@ public abstract class DiffySwerveModule extends SwerveModule {
     protected final DcMotor right;
     protected final DcMotor left;
 
-    public DiffySwerveModule(DcMotor right, DcMotor left) {
+    public DiffySwerveModule(double x, double y, DcMotor right, DcMotor left) {
+        super(x, y);
         this.left = left;
         this.right = right;
         left.setDirection(DcMotor.Direction.FORWARD);

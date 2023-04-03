@@ -7,7 +7,7 @@ public class PID {
     public double p, i, d;
     private double lastError = 0;
     private double integralSum = 0;
-    private ElapsedTime timer = new ElapsedTime();
+    private final ElapsedTime timer = new ElapsedTime();
 
     public PID(double p, double i, double d) {
         this.p = p;

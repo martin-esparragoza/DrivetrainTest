@@ -1,16 +1,18 @@
 package org.firstinspires.ftc.teamcode.libswerve;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.firstinspires.ftc.teamcode.libswerve.PID;
-import org.firstinspires.ftc.teamcode.libswerve.Util;
 
 @Config
 public abstract class SwerveModule {
     private double targetAngle = 0;
     public static PID pid = new PID(0.5, 0, 0.1);
     public double fwdPower = 0;
+    protected final double x, y;
+
+    public SwerveModule(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 
     /**
      * Set powers of a swerve module
@@ -24,7 +26,6 @@ public abstract class SwerveModule {
 
     public void setTargetAngle(double targetAngle) {
         this.targetAngle = targetAngle;
-        pid.reset();
     }
 
     public double getTargetAngle() {

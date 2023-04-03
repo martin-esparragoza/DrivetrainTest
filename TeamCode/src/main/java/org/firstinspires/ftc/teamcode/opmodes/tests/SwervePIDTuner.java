@@ -23,6 +23,7 @@ public class SwervePIDTuner extends LinearOpMode {
         DcMotor dswerve_m0_0 = hardwareMap.get(DcMotor.class, "dswerve_m0_0");
         DcMotor dswerve_m1_0 = hardwareMap.get(DcMotor.class, "dswerve_m1_0");
         SwerveModule m1 = new TestSwerveModule(
+            0, 0,
             dswerve_m0_0,
             dswerve_m1_0
         );
