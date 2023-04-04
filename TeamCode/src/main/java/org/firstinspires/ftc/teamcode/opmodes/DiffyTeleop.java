@@ -18,7 +18,6 @@ public class DiffyTeleop extends OpMode {
     @Override
     public void init() {
         // Two diffy swerve modules
-        // TODO Set position
         m1 = new MySwerveModule(
             4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),

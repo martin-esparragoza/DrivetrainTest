@@ -23,11 +23,17 @@ public class Drivetrain {
 
     public void drive(Gamepad gamepad) {
         for (SwerveModule module : modules) {
-            module.fwdPower = Math.sqrt(Math.pow(gamepad.left_stick_y, 2) + Math.pow(gamepad.left_stick_x, 2));
+            module.fwdPower =
+                Math.sqrt(Math.pow(gamepad.left_stick_y, 2) + Math.pow(gamepad.left_stick_x, 2)) +
+                Math.sqrt(Math.pow(gamepad.right_stick_y, 2) + Math.pow(gamepad.right_stick_x, 2));
+            // Don't allow for it to go above 1
+            if (Math.abs(module.fwdPower) / 2 > 1) {
+                module.fwdPower /= 2;
+            }
 
             double strafeAngle = Math.atan2(gamepad.left_stick_y, gamepad.left_stick_x);
             // Perpendicular angle to robot origin
-            double turnAngle = (Math.PI / 2) + Math.atan2(module.y + orgy, module.y + orgy);
+            double turnAngle = ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) * gamepad.right_stick_x;
 
             module.setTargetAngle(Util.clampAngle(strafeAngle + turnAngle));
         }
