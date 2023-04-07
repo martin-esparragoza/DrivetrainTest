@@ -5,7 +5,7 @@ import com.acmerobotics.dashboard.config.Config;
 @Config
 public abstract class SwerveModule {
     private double targetAngle = 0;
-    public static PID pid = new PID(0.5, 0, 0.1);
+    public static PID pid = new PID(1, 0, 0.6);
     public double fwdPower = 0;
     protected final double x, y;
 
@@ -22,6 +22,10 @@ public abstract class SwerveModule {
      */
     public abstract void setPowers(double turnPower, double forwardPower);
 
+    /**
+     *
+     * @return Hardware angle (Determined by you)
+     */
     public abstract double getAngle();
 
     public void setTargetAngle(double targetAngle) {
@@ -32,6 +36,9 @@ public abstract class SwerveModule {
         return targetAngle;
     }
 
+    /**
+     * Move to target angle
+     */
     public void update() {
         setPowers(-pid.getOut(Util.clampAngle(targetAngle - getAngle())), fwdPower);
     }

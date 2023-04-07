@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.libswerve.Util;
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
+import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 
 @Config
 @Autonomous(name = "Swerve PID Tuner", group = "tests")
@@ -22,7 +23,7 @@ public class SwervePIDTuner extends LinearOpMode {
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
         DcMotor dswerve_m0_0 = hardwareMap.get(DcMotor.class, "dswerve_m0_0");
         DcMotor dswerve_m1_0 = hardwareMap.get(DcMotor.class, "dswerve_m1_0");
-        SwerveModule m1 = new TestSwerveModule(
+        SwerveModule m1 = new MySwerveModule(
             0, 0,
             dswerve_m0_0,
             dswerve_m1_0

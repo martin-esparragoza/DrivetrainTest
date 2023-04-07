@@ -33,6 +33,7 @@ public class DiffyTeleop extends OpMode {
 
     @Override
     public void loop() {
-        drive.drive(gamepad1);
+        drive.setModules(gamepad1);
+        drive.update();
     }
 }

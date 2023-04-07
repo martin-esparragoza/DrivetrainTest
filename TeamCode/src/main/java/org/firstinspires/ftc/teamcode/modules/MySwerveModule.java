@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.modules;
 
-import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
@@ -9,15 +8,12 @@ import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
 public class MySwerveModule extends DiffySwerveModule {
     public MySwerveModule(double x, double y, DcMotor right, DcMotor left) {
         super(x, y, right, left);
-        left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        left.setDirection(DcMotor.Direction.FORWARD);
+        right.setDirection(DcMotor.Direction.FORWARD);
     }
 
     @Override
     public double getAngle() {
-        // TODO
-        return 0;
+        return (((right.getCurrentPosition() / 537.6) * (2 * Math.PI)) + ((left.getCurrentPosition() / 537.6) * (2 * Math.PI))) / (66.0 / 30.0) / 2;
     }
 }

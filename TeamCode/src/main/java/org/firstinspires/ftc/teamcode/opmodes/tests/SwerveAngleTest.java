@@ -6,17 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
 import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
-
-class TestSwerveModule extends DiffySwerveModule {
-    public TestSwerveModule(double x, double y, DcMotor right, DcMotor left) {
-        super(x, y, right, left);
-    }
-
-    @Override
-    public double getAngle() {
-        return (((right.getCurrentPosition() / 537.6) * (2 * Math.PI)) + ((left.getCurrentPosition() / 537.6) * (2 * Math.PI))) / (90.0 / 32.0) / 2;
-    }
-}
+import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 
 @Autonomous(name = "Swerve Angle Test", group = "tests")
 public class SwerveAngleTest extends LinearOpMode {
@@ -24,7 +14,7 @@ public class SwerveAngleTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        m1 = new TestSwerveModule(
+        m1 = new MySwerveModule(
             0, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
