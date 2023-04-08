@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
 import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 
 @Autonomous
-public final class ArcTest extends LinearOpMode {
+public final class PurePursuitTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // Two diffy swerve modules
@@ -36,8 +36,10 @@ public final class ArcTest extends LinearOpMode {
 
         waitForStart();
 
+        Path p = new Path();
+        p.addSpline(drive.localizer.getPoseEstimate(), new Pose2d(20, 20, 1), 1.2, 0.26, 3);
         drive.executePurePursuit(
-            new Path(drive.localizer.getPoseEstimate(), new Pose2d(20, 20, 1), 1.2),
+            p,
             new OpmodeFunctions() {
                 @Override
                 public boolean check() {
