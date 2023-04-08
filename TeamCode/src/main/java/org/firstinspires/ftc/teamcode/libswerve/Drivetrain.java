@@ -56,50 +56,13 @@ public final class Drivetrain {
     }
 
     /**
-     * <b>Does not robot heading</b><br>
-     * Follows arc to point until finished or <code>c.call()</code> returns null<br>
-     * <b>WARNING: THIS FUNCTION DOES NOT UPDATE THE DRIVETRAIN. DO IT YOURSELF IN <code>c.update()</code></b>
-     * @param p Pose to move to while changing the robot heading
-     * @param c .check() function checks if you should stop or not. .update should update all subsystems
-     * @param threshold Cutoff distance
-     */
-    public void toPoint(Pose2d p, OpmodeFunctions c, double threshold) {
-        Pose2d pose = localizer.getPoseEstimate();
-        while (c.check() && pose.distance(p) > threshold) {
-            c.update();
-
-            // Angle to point
-            double strafeAngle = Math.atan2(p.y - pose.y, p.x - pose.x);
-            for (SwerveModule module : modules) {
-                module.setTargetAngle(Util.clampAngle(strafeAngle));
-                // TODO
-                module.fwdPower = 1.0;
-            }
-        }
-    }
-
-    /**
      * <b>Changes robot heading</b><br>
-     * Follows arc to point until finished or <code>c.call()</code> returns null<br>
+     * Pure pursuit implementation <code>c.call()</code> returns null<br>
      * <b>WARNING: THIS FUNCTION DOES NOT UPDATE THE DRIVETRAIN. DO IT YOURSELF IN <code>c.update()</code></b>
-     * @param p Pose to move to while changing the robot heading
-     * @param c .check() function checks if you should stop or not. .update should update all subsystems
-     * @param threshold Cutoff distance
+     * @param p Path to follow
+     * @param c <code>.check()</code> function checks if you should stop or not. <code>.update</code> should update all subsystems
      */
-    public void toPose(Pose2d p, OpmodeFunctions c, double threshold) {
-        // TODO
-        Pose2d pose = localizer.getPoseEstimate();
-        while (c.check() && pose.distance(p) > threshold) {
-            c.update();
-
-            // Angle to point
-            double strafeAngle = Math.atan2(p.y - pose.y, p.x - pose.x);
-            for (SwerveModule module : modules) {
-                module.setTargetAngle(Util.clampAngle(strafeAngle));
-                // TODO
-                module.fwdPower = 1.0;
-            }
-        }
+    public void executePurePursuit(Path p, OpmodeFunctions c) {
     }
 
     public void brake() {

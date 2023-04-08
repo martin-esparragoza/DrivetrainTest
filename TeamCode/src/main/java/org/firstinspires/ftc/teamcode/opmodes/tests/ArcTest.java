@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.libswerve.Drivetrain;
 import org.firstinspires.ftc.teamcode.libswerve.OpmodeFunctions;
+import org.firstinspires.ftc.teamcode.libswerve.Path;
 import org.firstinspires.ftc.teamcode.libswerve.Pose2d;
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
 import org.firstinspires.ftc.teamcode.libswerve.TwoWheelLocalizer;
@@ -35,18 +36,21 @@ public final class ArcTest extends LinearOpMode {
 
         waitForStart();
 
-        drive.toPoint(new Pose2d(20, 20, 0), new OpmodeFunctions() {
-            @Override
-            public boolean check() {
-                return opModeIsActive();
-            }
+        drive.executePurePursuit(
+            new Path(drive.localizer.getPoseEstimate(), new Pose2d(20, 20, 1), 1.2),
+            new OpmodeFunctions() {
+                @Override
+                public boolean check() {
+                    return opModeIsActive();
+                }
 
-            @Override
-            public void update() {
-                drive.update();
-                drive.localizer.update();
+                @Override
+                public void update() {
+                    drive.update();
+                    drive.localizer.update();
+                }
             }
-        }, 1.2);
+        );
         drive.brake();
     }
 }
