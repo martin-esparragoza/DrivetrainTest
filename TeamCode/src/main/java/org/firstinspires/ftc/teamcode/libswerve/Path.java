@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.libswerve;
 import java.util.LinkedList;
 
 public class Path {
-    private LinkedList<Pose2d> points = new LinkedList<>();
+    private final LinkedList<Pose2d> points = new LinkedList<>();
     private double threshold;
 
     public Path() {}
