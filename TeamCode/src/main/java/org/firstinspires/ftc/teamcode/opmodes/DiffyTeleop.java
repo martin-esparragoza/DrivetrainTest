@@ -37,7 +37,7 @@ class MyDrivetrain extends Drivetrain {
                 Math.signum(gamepad.right_stick_x) *
                 Math.max(1.0 - leftmag, 0.5 * rightmag); // If both left and right are used turn at half speed in order to also move
 
-            module.setTargetAngle(Util.clampAngle((Math.PI / 2) + strafeAngle + turnAngle));
+            module.setTargetAngle(strafeAngle + turnAngle);
         }
     }
 }

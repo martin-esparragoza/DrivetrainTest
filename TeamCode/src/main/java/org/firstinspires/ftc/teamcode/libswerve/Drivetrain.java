@@ -71,7 +71,7 @@ public abstract class Drivetrain {
                 // Convert that to an angle!
                 double turnAngle = ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) * turnProportion;
 
-                module.setTargetAngle(Util.clampAngle((Math.PI / 2) + strafeAngle + turnAngle));
+                module.setTargetAngle(strafeAngle + turnAngle);
             }
 
             c.update();

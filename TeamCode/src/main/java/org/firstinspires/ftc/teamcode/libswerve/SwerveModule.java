@@ -29,8 +29,12 @@ public abstract class SwerveModule {
      */
     public abstract double getAngle();
 
+    /**
+     * <b>THIS FUNCTION RUNS <code>Util.clampAngle()</code>. YOU DO NOT HAVE TO RUN IT!</b>
+     * @param targetAngle radians
+     */
     public void setTargetAngle(double targetAngle) {
-        this.targetAngle = targetAngle;
+        this.targetAngle = Util.clampAngle(targetAngle);
     }
 
     public double getTargetAngle() {
