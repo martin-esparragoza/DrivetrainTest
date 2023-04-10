@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes.tests;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.libswerve.Drivetrain;
 import org.firstinspires.ftc.teamcode.libswerve.OpmodeFunctions;
@@ -34,7 +35,12 @@ public final class PurePursuitTest extends LinearOpMode {
             new SwerveModule[]{m1, m2},
             0.1,
             0.1
-        );
+        ) {
+            @Override
+            public void setModules(Gamepad gamepad) {
+                return;
+            }
+        };
 
         waitForStart();
 

@@ -7,7 +7,8 @@ public abstract class SwerveModule {
     private double targetAngle = 0;
     public static PID pid = new PID(1, 0, 0.6);
     public double fwdPower = 0;
-    protected final double x, y;
+    public final double x;
+    public final double y;
 
     public SwerveModule(double x, double y) {
         this.x = x;

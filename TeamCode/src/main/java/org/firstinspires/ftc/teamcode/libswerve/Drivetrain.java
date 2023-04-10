@@ -3,10 +3,10 @@ package org.firstinspires.ftc.teamcode.libswerve;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public final class Drivetrain {
+public abstract class Drivetrain {
     public final Localizer localizer;
-    private final SwerveModule[] modules;
-    private final double orgx, orgy;
+    protected final SwerveModule[] modules;
+    protected final double orgx, orgy;
     private final double maxTurnSpeed, maxVelocity;
     private final ElapsedTime timer = new ElapsedTime();
 
@@ -28,30 +28,7 @@ public final class Drivetrain {
         this.maxTurnSpeed = maxTurnSpeed;
     }
 
-    /**
-     * Gamepad left stick: strafing<br>
-     * Gamepad right stick: turning<br>
-     * <b>DOES NOT UPDATE THE SWERVE MODULES USE <code>Drivetrain.update()</code></b>
-     * @param gamepad
-     */
-    public void setModules(Gamepad gamepad) {
-        for (SwerveModule module : modules) {
-            // Distance, use both gamepads to get the power
-            double leftmag = Math.sqrt(Math.pow(gamepad.left_stick_y, 2) + Math.pow(gamepad.left_stick_x, 2));
-            double rightmag = Math.sqrt(Math.pow(gamepad.right_stick_y, 2) + Math.pow(gamepad.right_stick_x, 2));
-            module.fwdPower = Math.min(leftmag + rightmag, 1);
-
-            // x and y are reversed???
-            double strafeAngle = Math.atan2(gamepad.left_stick_y, gamepad.left_stick_x);
-            // Perpendicular angle to robot origin
-            double turnAngle =
-                ((Math.PI / 2) + Math.atan2(module.y - orgy, module.x - orgx)) *
-                Math.signum(gamepad.right_stick_x) *
-                Math.max(1.0 - leftmag, 0.5 * rightmag); // If both left and right are used turn at half speed in order to also move
-
-            module.setTargetAngle(Util.clampAngle((Math.PI / 2) + strafeAngle + turnAngle));
-        }
-    }
+    public abstract void setModules(Gamepad gamepad);
 
     /**
      * <b>Updates all swerve modules</b>>
@@ -94,7 +71,7 @@ public final class Drivetrain {
                 // Convert that to an angle!
                 double turnAngle = ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) * turnProportion;
 
-                module.setTargetAngle(Util.clampAngle(strafeAngle + turnAngle));
+                module.setTargetAngle(Util.clampAngle((Math.PI / 2) + strafeAngle + turnAngle));
             }
 
             c.update();

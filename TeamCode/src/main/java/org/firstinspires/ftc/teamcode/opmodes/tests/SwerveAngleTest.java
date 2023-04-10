@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
-import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
 import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 
 @Autonomous(name = "Swerve Angle Test", group = "tests")
