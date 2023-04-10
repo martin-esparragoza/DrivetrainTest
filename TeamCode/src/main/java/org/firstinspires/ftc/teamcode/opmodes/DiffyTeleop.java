@@ -30,7 +30,6 @@ class MyDrivetrain extends Drivetrain {
             double rightmag = Math.sqrt(Math.pow(gamepad.right_stick_y, 2) + Math.pow(gamepad.right_stick_x, 2));
             module.fwdPower = Math.min(leftmag + rightmag, 1);
 
-            // x and y are reversed???
             double strafeAngle = Math.atan2(gamepad.left_stick_y, gamepad.left_stick_x);
             // Perpendicular angle to robot origin
             double turnAngle =
