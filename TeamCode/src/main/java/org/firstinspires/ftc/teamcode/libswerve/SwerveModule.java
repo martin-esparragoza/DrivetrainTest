@@ -40,6 +40,7 @@ public abstract class SwerveModule {
      * Move to target angle
      */
     public void update() {
-        setPowers(-pid.getOut(Util.clampAngle(targetAngle - getAngle())), fwdPower);
+        // Set this to negative if PID absolutely not working
+        setPowers(pid.getOut(Util.clampAngle(targetAngle - getAngle())), fwdPower);
     }
 }

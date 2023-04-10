@@ -41,14 +41,15 @@ public final class Drivetrain {
             double rightmag = Math.sqrt(Math.pow(gamepad.right_stick_y, 2) + Math.pow(gamepad.right_stick_x, 2));
             module.fwdPower = Math.min(leftmag + rightmag, 1);
 
+            // x and y are reversed???
             double strafeAngle = Math.atan2(gamepad.left_stick_y, gamepad.left_stick_x);
             // Perpendicular angle to robot origin
             double turnAngle =
-                ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) *
+                ((Math.PI / 2) + Math.atan2(module.y - orgy, module.x - orgx)) *
                 Math.signum(gamepad.right_stick_x) *
                 Math.max(1.0 - leftmag, 0.5 * rightmag); // If both left and right are used turn at half speed in order to also move
 
-            module.setTargetAngle(Util.clampAngle(strafeAngle + turnAngle));
+            module.setTargetAngle(Util.clampAngle((Math.PI / 2) + strafeAngle + turnAngle));
         }
     }
 
