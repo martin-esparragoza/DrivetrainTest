@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode.libswerve;
 
 import java.util.LinkedList;
 
-public class Path {
-    private final LinkedList<Pose2d> points = new LinkedList<>();
-    private double threshold;
+public final class Path {
+    protected final LinkedList<Pose2d> points = new LinkedList<>();
+    public double threshold;
 
     public Path() {}
 
@@ -15,11 +15,10 @@ public class Path {
     /**
      * Create a new spline between two poses <b>(splines heading)</b><br>
      * Derived in <code>https://www.desmos.com/calculator/e8hut5lqcm</code>
-     * @param threshold Threshold in inches (when running pure pursuit radius to kill points)
      * @param d distance scalar (check d0 and d1 from desmos graph)
      * @param pointDistance distance between each point (inches)
      */
-    public void addSpline(Pose2d p0, Pose2d p1, double threshold, double d, double pointDistance) {
+    public void addSpline(Pose2d p0, Pose2d p1, double d, double pointDistance) {
         Pose2d last = p0;
         double distance = Math.sqrt(Math.pow(p0.x - p1.x, 2) + Math.pow(p0.y - p1.y, 2));
         double x0 = distance * Math.cos(p0.h) * d + p0.x;

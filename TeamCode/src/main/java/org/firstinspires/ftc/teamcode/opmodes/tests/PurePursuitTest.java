@@ -31,13 +31,16 @@ public final class PurePursuitTest extends LinearOpMode {
         Drivetrain drive = new Drivetrain(
             0, 0,
             new TwoWheelLocalizer(new Pose2d(0.0, 0.0, 0.0)),
-            new SwerveModule[]{m1, m2}
+            new SwerveModule[]{m1, m2},
+            0.1,
+            0.1
         );
 
         waitForStart();
 
         Path p = new Path();
-        p.addSpline(drive.localizer.getPoseEstimate(), new Pose2d(20, 20, 1), 1.2, 0.26, 3);
+        p.threshold = 1.2;
+        p.addSpline(drive.localizer.getPoseEstimate(), new Pose2d(20, 20, 1), 1.2, 3);
         drive.executePurePursuit(
             p,
             new OpmodeFunctions() {

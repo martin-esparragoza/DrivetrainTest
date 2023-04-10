@@ -27,15 +27,7 @@ public abstract class DiffySwerveModule extends SwerveModule {
 
     @Override
     public void setPowers(double turnPower, double forwardPower) {
-        double rightPower = turnPower + forwardPower;
-        double leftPower = turnPower - forwardPower;
-        // Minimize to a power that won't go above 2
-        if (Math.abs(rightPower) / 2 > 1.0 && Math.abs(leftPower) / 2 > 1.0) {
-            rightPower /= 2;
-            leftPower /= 2;
-        }
-
-        right.setPower(rightPower);
-        left.setPower(leftPower);
+        right.setPower(turnPower + forwardPower);
+        left.setPower(turnPower - forwardPower);
     }
 }

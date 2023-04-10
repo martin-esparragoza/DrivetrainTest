@@ -28,7 +28,7 @@ public class DiffyTeleop extends OpMode {
             hardwareMap.get(DcMotor.class, "dswerve_m0_1"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_1")
         );
-        drive = new Drivetrain(0, 0, null, new SwerveModule[]{m1, m2});
+        drive = new Drivetrain(0, 0, null, new SwerveModule[]{m1, m2}, 0.1, 0.1);
     }
 
     @Override
