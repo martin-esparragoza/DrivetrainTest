@@ -76,7 +76,7 @@ public abstract class Drivetrain {
                 double turnProportion = (maxVelocity * dist) / (maxTurnSpeed * target.h + maxVelocity * dist);
 
                 // Convert that to an angle!
-                double turnAngle = ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) * turnProportion * turnSign;
+                double turnAngle = ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) * turnProportion * turnSign * module.fwdPower;
 
                 module.setTargetAngle(strafeAngle + turnAngle);
                 turnSign *= -1;
