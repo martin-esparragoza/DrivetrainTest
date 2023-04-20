@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.teamcode.libswerve.Drivetrain;
 import org.firstinspires.ftc.teamcode.libswerve.Localizer;
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
-import org.firstinspires.ftc.teamcode.libswerve.Util;
 import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 
 class MyDrivetrain extends Drivetrain {
@@ -24,20 +23,22 @@ class MyDrivetrain extends Drivetrain {
      * @param gamepad
      */
     public void setModules(Gamepad gamepad) {
+        // Distance, use both gamepads to get the power (this is so it doesn't have to be calculated again)
+        double leftmag = Math.sqrt(Math.pow(gamepad.left_stick_y, 2) + Math.pow(gamepad.left_stick_x, 2));
+        double rightmag = Math.abs(gamepad.right_stick_x);
+        int turnSign = 1; // This is so different swerve modules turn different ways instead of the same way
         for (SwerveModule module : modules) {
-            // Distance, use both gamepads to get the power
-            double leftmag = Math.sqrt(Math.pow(gamepad.left_stick_y, 2) + Math.pow(gamepad.left_stick_x, 2));
-            double rightmag = Math.sqrt(Math.pow(gamepad.right_stick_y, 2) + Math.pow(gamepad.right_stick_x, 2));
             module.fwdPower = Math.min(leftmag + rightmag, 1);
 
             double strafeAngle = Math.atan2(gamepad.left_stick_y, gamepad.left_stick_x);
             // Perpendicular angle to robot origin
             double turnAngle =
                 ((Math.PI / 2) + Math.atan2(module.y - orgy, module.x - orgx)) *
-                Math.signum(gamepad.right_stick_x) *
+                Math.signum(gamepad.right_stick_x) * turnSign *
                 Math.max(1.0 - leftmag, 0.5 * rightmag); // If both left and right are used turn at half speed in order to also move
 
             module.setTargetAngle(strafeAngle + turnAngle);
+            turnSign *= -1;
         }
     }
 }

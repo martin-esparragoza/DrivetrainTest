@@ -60,6 +60,13 @@ public abstract class Drivetrain {
                 dist = target.distance(current);
             }
 
+            int turnSign = 1;
+            /**
+             * O-----O
+             * |  o  |
+             * |-----|
+             * These two modules will both point the same direction so you use this to alternate the turning direction of every swerve module
+             */
             for (SwerveModule module : modules) {
                 module.fwdPower = 1.0;
 
@@ -69,9 +76,10 @@ public abstract class Drivetrain {
                 double turnProportion = (maxVelocity * dist) / (maxTurnSpeed * target.h + maxVelocity * dist);
 
                 // Convert that to an angle!
-                double turnAngle = ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) * turnProportion;
+                double turnAngle = ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) * turnProportion * turnSign * module.fwdPower;
 
                 module.setTargetAngle(strafeAngle + turnAngle);
+                turnSign *= -1;
             }
 
             c.update();
