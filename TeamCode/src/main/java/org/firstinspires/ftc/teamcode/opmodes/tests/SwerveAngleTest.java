@@ -14,7 +14,7 @@ public class SwerveAngleTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         m1 = new MySwerveModule(
-            0, 0,
+            0, 0, Math.PI / 2,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );

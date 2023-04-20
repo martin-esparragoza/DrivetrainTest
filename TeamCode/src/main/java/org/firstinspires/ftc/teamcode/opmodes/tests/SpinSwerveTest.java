@@ -22,7 +22,7 @@ public class SpinSwerveTest extends LinearOpMode {
         left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        SwerveModule module = new DiffySwerveModule(0, 0, right, left) {
+        SwerveModule module = new DiffySwerveModule(0, 0, Math.PI / 2, right, left) {
             @Override
             public double getAngle() {
                 return 0;

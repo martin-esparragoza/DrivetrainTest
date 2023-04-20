@@ -51,16 +51,16 @@ public class DiffyTeleop extends OpMode {
     public void init() {
         // Two diffy swerve modules
         m1 = new MySwerveModule(
-            4, 0,
+            4, 0, Math.PI / 2,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );
-        /*m2 = new MySwerveModule(
-            -4, 0,
+        m2 = new MySwerveModule(
+            -4, 0, Math.PI / 2,
             hardwareMap.get(DcMotor.class, "dswerve_m0_1"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_1")
-        );*/
-        drive = new MyDrivetrain(0, 0, null, new SwerveModule[]{m1/*, m2*/}, 0.1, 0.1);
+        );
+        drive = new MyDrivetrain(0, 0, null, new SwerveModule[]{m1, m2}, 0.1, 0.1);
     }
 
     @Override

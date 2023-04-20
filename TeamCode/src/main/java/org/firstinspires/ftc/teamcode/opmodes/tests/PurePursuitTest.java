@@ -20,19 +20,19 @@ public final class PurePursuitTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         // Two diffy swerve modules
         DiffySwerveModule m1 = new MySwerveModule(
-            4, 0,
+            4, 0, Math.PI / 2,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );
-        DiffySwerveModule m2 = new MySwerveModule(
+        /*DiffySwerveModule m2 = new MySwerveModule(
             -4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_1"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_1")
-        );
+        );*/
         Drivetrain drive = new Drivetrain(
             0, 0,
-            new TwoWheelLocalizer(new Pose2d(0.0, 0.0, 0.0)),
-            new SwerveModule[]{m1, m2},
+            new TwoWheelLocalizer(new Pose2d(0, 0, 0), 4, 4),
+            new SwerveModule[]{m1/*, m2*/},
             0.1,
             0.1
         ) {
@@ -57,8 +57,9 @@ public final class PurePursuitTest extends LinearOpMode {
 
                 @Override
                 public void update() {
-                    drive.update();
+                    // TODO update encoder values for localizer
                     drive.localizer.update();
+                    drive.update();
                 }
             }
         );
