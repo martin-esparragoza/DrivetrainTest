@@ -20,7 +20,7 @@ public final class PurePursuitTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         // Two diffy swerve modules
         DiffySwerveModule m1 = new MySwerveModule(
-            4, 0, Math.PI / 2,
+            4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );

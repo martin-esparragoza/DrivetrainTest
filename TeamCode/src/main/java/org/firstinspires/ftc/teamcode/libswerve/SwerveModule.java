@@ -9,12 +9,10 @@ public abstract class SwerveModule {
     public double fwdPower = 0;
     public final double x;
     public final double y;
-    public final double zero;
 
-    public SwerveModule(double x, double y, double zero) {
+    public SwerveModule(double x, double y) {
         this.x = x;
         this.y = y;
-        this.zero = zero;
     }
 
     /**
@@ -48,6 +46,6 @@ public abstract class SwerveModule {
      */
     public void update() {
         // Set this to negative if PID absolutely not working
-        setPowers(pid.getOut(Util.clampAngle(targetAngle - getAngle() + zero)), fwdPower);
+        setPowers(pid.getOut(Util.clampAngle(targetAngle - getAngle())), fwdPower);
     }
 }

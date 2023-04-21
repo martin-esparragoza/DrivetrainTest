@@ -15,8 +15,8 @@ public abstract class DiffySwerveModule extends SwerveModule {
      * @param right
      * @param left
      */
-    public DiffySwerveModule(double x, double y, double zero, DcMotor right, DcMotor left) {
-        super(x, y, zero);
+    public DiffySwerveModule(double x, double y, DcMotor right, DcMotor left) {
+        super(x, y);
         this.left = left;
         this.right = right;
         left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

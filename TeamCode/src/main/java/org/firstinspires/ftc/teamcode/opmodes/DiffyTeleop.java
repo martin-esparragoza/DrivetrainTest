@@ -52,12 +52,12 @@ public class DiffyTeleop extends OpMode {
     public void init() {
         // Two diffy swerve modules
         m1 = new MySwerveModule(
-            4, 0, Math.PI / 2,
+            4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );
         m2 = new MySwerveModule(
-            -4, 0, Math.PI / 2,
+            -4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_1"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_1")
         );
