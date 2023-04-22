@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 import java.util.Vector;
 
 class MyDrivetrain extends Drivetrain {
-    public static final double speed = 1.0;
+    public static final double speed = 0.25;
 
     public MyDrivetrain(double orgx, double orgy, Localizer localizer, SwerveModule[] modules, double maxVelocity, double maxTurnSpeed) {
         super(orgx, orgy, localizer, modules, maxVelocity, maxTurnSpeed);
@@ -44,7 +44,8 @@ class MyDrivetrain extends Drivetrain {
             module.fwdPower = Math.min(strafeVectorMag + Math.abs(gamepad.right_stick_x), 1) * speed;
             Vector2 turnVector = new Vector2(module.y + orgy, -(module.x + orgx));
             //turnVector.mul(Math.signum(gamepad.right_stick_x) * Math.min(Math.abs(gamepad.right_stick_x), 0.5 * strafeVectorMag));
-            turnVector.mul(gamepad.right_stick_x);
+            turnVector.mul((gamepad.right_stick_x + (1.0 - strafeVectorMag)) / 2);
+            //turnVector.mul(gamepad.right_stick_x);
             Vector2 finalVector = Vector2.add(turnVector, strafeVector);
 
             //module.fwdPower = finalVector.mag();
