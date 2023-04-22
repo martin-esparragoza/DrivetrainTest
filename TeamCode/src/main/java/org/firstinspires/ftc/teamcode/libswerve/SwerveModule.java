@@ -30,11 +30,19 @@ public abstract class SwerveModule {
     public abstract double getAngle();
 
     /**
-     * <b>THIS FUNCTION RUNS <code>Util.clampAngle()</code>. YOU DO NOT HAVE TO RUN IT!</b>
+     * <b>CLIPS FOR YOU. SET THE POWER FIRST.</b>
      * @param targetAngle radians
      */
     public void setTargetAngle(double targetAngle) {
-        this.targetAngle = Util.clampAngle(targetAngle);
+        // Instead of clamping to -180, 180 clamp to -90, 90 and just switch the signs on the fwdPower when necessary
+        while (targetAngle > Math.PI / 2) {
+            targetAngle -= Math.PI;
+        }
+        while (targetAngle < -(Math.PI / 2)) {
+            targetAngle += Math.PI;
+        }
+        this.targetAngle = targetAngle;
+        fwdPower *= Math.signum(targetAngle);
     }
 
     public double getTargetAngle() {

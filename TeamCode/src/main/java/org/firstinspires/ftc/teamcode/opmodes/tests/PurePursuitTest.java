@@ -24,15 +24,15 @@ public final class PurePursuitTest extends LinearOpMode {
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );
-        /*DiffySwerveModule m2 = new MySwerveModule(
+        DiffySwerveModule m2 = new MySwerveModule(
             -4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_1"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_1")
-        );*/
+        );
         Drivetrain drive = new Drivetrain(
-            0, 0,
+            0.5,
             new TwoWheelLocalizer(new Pose2d(0, 0, 0), 4, 4),
-            new SwerveModule[]{m1/*, m2*/},
+            new SwerveModule[]{m1, m2},
             0.1,
             0.1
         ) {

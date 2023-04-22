@@ -6,22 +6,19 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public abstract class Drivetrain {
     public final Localizer localizer;
     protected final SwerveModule[] modules;
-    protected final double orgx, orgy;
     private final double maxTurnSpeed, maxVelocity;
     private final ElapsedTime timer = new ElapsedTime();
+    protected final double speed;
 
     /**
      *
-     * @param orgx X position for the robot centric origin (inches)
-     * @param orgy Y position for the robot centric origin (inches)
      * @param localizer
      * @param modules
      * @param maxVelocity The maximum velocity of the robot (in/ns)
      * @param maxTurnSpeed Max turn speed of robot (radians/ns)
      */
-    public Drivetrain(double orgx, double orgy, Localizer localizer, SwerveModule[] modules, double maxVelocity, double maxTurnSpeed) {
-        this.orgx = orgx;
-        this.orgy = orgy;
+    public Drivetrain(double speed, Localizer localizer, SwerveModule[] modules, double maxVelocity, double maxTurnSpeed) {
+        this.speed = speed;
         this.localizer = localizer;
         this.modules = modules;
         this.maxVelocity = maxVelocity;
@@ -60,18 +57,19 @@ public abstract class Drivetrain {
                 dist = target.distance(current);
             }
 
+            Vector2 strafeVector = new Vector2(current.x - target.x, current.y - target.y);
             for (SwerveModule module : modules) {
-                module.fwdPower = 1.0;
+                module.fwdPower = speed;
+                Vector2 turnVector = new Vector2(module.y, -(module.x)); // Perp
 
-                // These are some pretty sketchy things FIXME later
-                double strafeAngle = Math.atan2(orgx + current.y - target.y, orgy + current.x - target.x);
+                turnVector.mul(
+                    // Ill write some stuff on how I got this later
+                    (maxVelocity * dist) / (maxTurnSpeed * target.h + maxVelocity * dist)
+                );
 
-                double turnProportion = (maxVelocity * dist) / (maxTurnSpeed * target.h + maxVelocity * dist);
+                Vector2 finalVector = Vector2.add(turnVector, strafeVector);
 
-                // Convert that to an angle!
-                double turnAngle = ((Math.PI / 2) + Math.atan2(module.y + orgy, module.x + orgx)) * turnProportion * module.fwdPower;
-
-                module.setTargetAngle(strafeAngle + turnAngle);
+                module.setTargetAngle(Math.atan2(finalVector.y, finalVector.x));
             }
 
             c.update();
