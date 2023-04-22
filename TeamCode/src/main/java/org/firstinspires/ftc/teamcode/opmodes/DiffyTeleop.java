@@ -8,9 +8,14 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.teamcode.libswerve.Drivetrain;
 import org.firstinspires.ftc.teamcode.libswerve.Localizer;
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
+import org.firstinspires.ftc.teamcode.libswerve.Vector2;
 import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 
+import java.util.Vector;
+
 class MyDrivetrain extends Drivetrain {
+    public static final double speed = 1.0;
+
     public MyDrivetrain(double orgx, double orgy, Localizer localizer, SwerveModule[] modules, double maxVelocity, double maxTurnSpeed) {
         super(orgx, orgy, localizer, modules, maxVelocity, maxTurnSpeed);
     }
@@ -24,21 +29,27 @@ class MyDrivetrain extends Drivetrain {
      */
     public void setModules(Gamepad gamepad) {
         // Distance, use both gamepads to get the power (this is so it doesn't have to be calculated again)
-        double leftmag = Math.sqrt(Math.pow(gamepad.left_stick_y, 2) + Math.pow(gamepad.left_stick_x, 2));
-        double rightmag = Math.abs(gamepad.right_stick_x);
-        int turnSign = 1; // This is so different swerve modules turn different ways instead of the same way
         for (SwerveModule module : modules) {
-            module.fwdPower = Math.min(leftmag + rightmag, 1);
-
-            double strafeAngle = Math.atan2(gamepad.left_stick_y, gamepad.left_stick_x);
+            /*double strafeAngle = Math.atan2(gamepad.left_stick_y, gamepad.left_stick_x);
             // Perpendicular angle to robot origin
             double turnAngle =
                 ((Math.PI / 2) + Math.atan2(module.y - orgy, module.x - orgx)) *
-                Math.signum(gamepad.right_stick_x) * turnSign *
+                Math.signum(gamepad.right_stick_x) *
                 Math.max(1.0 - leftmag, 0.5 * rightmag); // If both left and right are used turn at half speed in order to also move
 
-            module.setTargetAngle(strafeAngle + turnAngle);
-            turnSign *= -1;
+            module.setTargetAngle(strafeAngle + turnAngle);*/
+
+            Vector2 strafeVector = new Vector2(gamepad.left_stick_x, gamepad.left_stick_y);
+            double strafeVectorMag = strafeVector.mag(); // Store so we don't have to calculate it multiple times
+            module.fwdPower = Math.min(strafeVectorMag + Math.abs(gamepad.right_stick_x), 1) * speed;
+            Vector2 turnVector = new Vector2(module.y + orgy, -(module.x + orgx));
+            //turnVector.mul(Math.signum(gamepad.right_stick_x) * Math.min(Math.abs(gamepad.right_stick_x), 0.5 * strafeVectorMag));
+            turnVector.mul(gamepad.right_stick_x);
+            Vector2 finalVector = Vector2.add(turnVector, strafeVector);
+
+            //module.fwdPower = finalVector.mag();
+
+            module.setTargetAngle(Math.atan2(finalVector.y, finalVector.x));
         }
     }
 }
