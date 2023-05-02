@@ -32,11 +32,11 @@ public class SwervePIDTuner extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
             m1.fwdPower = fwd;
-            telemetry.addData("Angle (deg):", Math.toDegrees(Util.clampAngle(m1.getAngle())));
-            telemetry.addData("Target (deg):", Math.toDegrees(Util.clampAngle(m1.getTargetAngle())));
-            telemetry.addData("Error:", Math.toDegrees(Util.clampAngle(m1.getTargetAngle() - m1.getAngle())));
-            telemetry.addData("Rightpwr:", dswerve_m0_0.getPower());
-            telemetry.addData("Leftpwr:", dswerve_m1_0.getPower());
+            telemetry.addData("Angle (deg)", Math.toDegrees(Util.clampAngle(m1.getAngle())));
+            telemetry.addData("Target (deg)", Math.toDegrees(Util.clampAngle(m1.getTargetAngle())));
+            telemetry.addData("Error", Math.toDegrees(Util.clampAngle(m1.getTargetAngle() - m1.getAngle())));
+            telemetry.addData("Rightpwr", dswerve_m0_0.getPower());
+            telemetry.addData("Leftpwr", dswerve_m1_0.getPower());
             telemetry.update();
 
             m1.setTargetAngle(angle);

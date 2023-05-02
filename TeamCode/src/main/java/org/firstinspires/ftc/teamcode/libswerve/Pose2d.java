@@ -19,4 +19,8 @@ public final class Pose2d {
             Math.pow(p.x - x, 2)
         );
     }
+
+    public String toString() {
+        return String.format("(%f, %f, %f)", x, y, h);
+    }
 }

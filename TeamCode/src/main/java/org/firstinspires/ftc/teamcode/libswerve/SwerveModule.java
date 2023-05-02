@@ -34,15 +34,16 @@ public abstract class SwerveModule {
      * @param targetAngle radians
      */
     public void setTargetAngle(double targetAngle) {
-        // Instead of clamping to -180, 180 clamp to -90, 90 and just switch the signs on the fwdPower when necessary
-        while (targetAngle > Math.PI / 2) {
+        while (targetAngle > getAngle() + Math.PI / 2) {
             targetAngle -= Math.PI;
+            fwdPower *= -1;
         }
-        while (targetAngle < -(Math.PI / 2)) {
+        while (targetAngle < getAngle() - Math.PI / 2) {
             targetAngle += Math.PI;
+            fwdPower *= -1;
         }
+
         this.targetAngle = targetAngle;
-        fwdPower *= Math.signum(targetAngle);
     }
 
     public double getTargetAngle() {
