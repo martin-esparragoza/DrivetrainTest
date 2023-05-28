@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.libswerve.Vector2;
 import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
 
 class MyDrivetrain extends Drivetrain {
-    public MyDrivetrain(double speed, Localizer localizer, SwerveModule[] modules, double maxVelocity, double maxTurnSpeed) {
-        super(speed, localizer, modules, maxVelocity, maxTurnSpeed);
+    public MyDrivetrain(double speed, Localizer localizer, SwerveModule[] modules) {
+        super(speed, localizer, modules);
     }
 
     @Override
@@ -23,7 +23,7 @@ class MyDrivetrain extends Drivetrain {
      * <b>DOES NOT UPDATE THE SWERVE MODULES USE <code>Drivetrain.update()</code></b>
      * @param gamepad
      */
-    public void setModules(Gamepad gamepad) {
+    public void drive(Gamepad gamepad) {
         setPower(new Vector2(gamepad.left_stick_x, gamepad.left_stick_y), gamepad.right_stick_x);
     }
 }
@@ -46,7 +46,7 @@ public class DiffyTeleop extends OpMode {
             hardwareMap.get(DcMotor.class, "dswerve_m0_1"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_1")
         );
-        drive = new MyDrivetrain(0.2, null, new SwerveModule[]{m1, m2}, 0.1, 0.1);
+        drive = new MyDrivetrain(0.2, null, new SwerveModule[]{m1, m2});
     }
 
     @Override
@@ -65,7 +65,7 @@ public class DiffyTeleop extends OpMode {
         telemetry.addData("Robot speed:", drive.speed);
         telemetry.update();
 
-        drive.setModules(gamepad1);
+        drive.drive(gamepad1);
         drive.update();
     }
 }

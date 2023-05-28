@@ -54,5 +54,6 @@ public abstract class TwoWheelLocalizer implements Localizer {
         this.p = p;
     }
 
+    // Used by the user to set encoder values for computation
     public abstract void updateValues(double dfwdEncoder, double dstrEncoder, double dTheta);
 }
