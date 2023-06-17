@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.libswerve;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 // Shamelessly copied from pj!
 public abstract class TwoWheelLocalizer implements Localizer {
     private Pose2d p;
