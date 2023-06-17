@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.libswerve.Drivetrain;
 import org.firstinspires.ftc.teamcode.libswerve.Localizer;
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
 import org.firstinspires.ftc.teamcode.libswerve.Vector2;
-import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
+import org.firstinspires.ftc.teamcode.modules.MyDiffySwerveModule;
 
 class MyDrivetrain extends Drivetrain {
     public MyDrivetrain(double speed, Localizer localizer, SwerveModule[] modules) {
@@ -36,12 +36,12 @@ public class DiffyTeleop extends OpMode {
     @Override
     public void init() {
         // Two diffy swerve modules
-        m1 = new MySwerveModule(
+        m1 = new MyDiffySwerveModule(
             4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );
-        m2 = new MySwerveModule(
+        m2 = new MyDiffySwerveModule(
             -4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_1"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_1")

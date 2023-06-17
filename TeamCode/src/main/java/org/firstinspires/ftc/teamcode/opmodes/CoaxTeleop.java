@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.libswerve.Drivetrain;
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
 import org.firstinspires.ftc.teamcode.libswerve.Vector2;
 import org.firstinspires.ftc.teamcode.libswerve.coaxial.CoaxialSwerveModule;
+import org.firstinspires.ftc.teamcode.modules.MyCoaxialSwerveModule;
 
 import java.util.Set;
 
@@ -21,24 +22,23 @@ public class CoaxTeleop extends OpMode {
 
     @Override
     public void init() {
+        SwerveModule m1 = new MyCoaxialSwerveModule(-1, 1,
+            hardwareMap.get(DcMotor.class, "FrontLeftM"),
+            hardwareMap.get(CRServo.class, "FrontLeftS"),
+            hardwareMap.get(AnalogInput.class, "FrontLeftE"));
+        SwerveModule m2 = new MyCoaxialSwerveModule(1, 1,
+            hardwareMap.get(DcMotor.class, "FrontRightM"),
+            hardwareMap.get(CRServo.class, "FrontLeftS"),
+            hardwareMap.get(AnalogInput.class, "FrontLeftE"));
+        SwerveModule m3 = new MyCoaxialSwerveModule(1, -1,
+            hardwareMap.get(DcMotor.class, "BackRight"),
+            hardwareMap.get(CRServo.class, "BackRightS"),
+            hardwareMap.get(AnalogInput.class, "BackRightE"));
+        SwerveModule m4 = new MyCoaxialSwerveModule(-1, -1,
+            hardwareMap.get(DcMotor.class, "BackLeftM"),
+            hardwareMap.get(CRServo.class, "BackLeftS"),
+            hardwareMap.get(AnalogInput.class, "BackLeftE"));
 
-
-        SwerveModule m1 = new CoaxialSwerveModule(-1,1,
-                hardwareMap.get(DcMotor.class, "FrontLeftM"),
-                hardwareMap.get(CRServo.class, "FrontLeftS"),
-                hardwareMap.get(AnalogInput.class, "FrontLeftE"));
-        SwerveModule m2 = new CoaxialSwerveModule(1,1,
-                hardwareMap.get(DcMotor.class, "FrontRightM"),
-                hardwareMap.get(CRServo.class, "FrontLeftS"),
-                hardwareMap.get(AnalogInput.class, "FrontLeftE"));
-        SwerveModule m3 = new CoaxialSwerveModule(1, -1,
-                hardwareMap.get(DcMotor.class, "BackRight"),
-                hardwareMap.get(CRServo.class, "BackRightS"),
-                hardwareMap.get(AnalogInput.class, "BackRightE"));
-        SwerveModule m4 = new CoaxialSwerveModule(-1,-1,
-                hardwareMap.get(DcMotor.class, "BackLeftM"),
-                hardwareMap.get(CRServo.class, "BackLeftS"),
-                hardwareMap.get(AnalogInput.class, "BackLeftE"));
         drivetrain = new Drivetrain(0.8, null, new SwerveModule[]{m1, m2, m3, m4}) {
             @Override
             public void drive(Gamepad gamepad) {

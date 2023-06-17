@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
 
 // TODO
-public class MySwerveModule extends DiffySwerveModule {
-    public MySwerveModule(double x, double y, DcMotor right, DcMotor left) {
+public class MyDiffySwerveModule extends DiffySwerveModule {
+    public MyDiffySwerveModule(double x, double y, DcMotor right, DcMotor left) {
         super(x, y, right, left);
         left.setDirection(DcMotor.Direction.FORWARD);
         right.setDirection(DcMotor.Direction.FORWARD);

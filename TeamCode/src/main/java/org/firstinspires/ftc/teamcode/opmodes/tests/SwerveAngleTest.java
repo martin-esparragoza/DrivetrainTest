@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
-import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
+import org.firstinspires.ftc.teamcode.modules.MyDiffySwerveModule;
 
 @Autonomous(name = "Swerve Angle Test", group = "tests")
 public class SwerveAngleTest extends LinearOpMode {
@@ -13,7 +13,7 @@ public class SwerveAngleTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        m1 = new MySwerveModule(
+        m1 = new MyDiffySwerveModule(
             0, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")

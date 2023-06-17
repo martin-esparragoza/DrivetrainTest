@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.IMU;
-import com.qualcomm.robotcore.util.ThreadPool;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -21,21 +20,19 @@ import org.firstinspires.ftc.teamcode.libswerve.SwerveModule;
 import org.firstinspires.ftc.teamcode.libswerve.TwoWheelLocalizer;
 import org.firstinspires.ftc.teamcode.libswerve.Vector2;
 import org.firstinspires.ftc.teamcode.libswerve.differential.DiffySwerveModule;
-import org.firstinspires.ftc.teamcode.modules.MySwerveModule;
-
-import java.util.concurrent.ExecutorService;
+import org.firstinspires.ftc.teamcode.modules.MyDiffySwerveModule;
 
 @Autonomous(name = "Auto test", group = "tests")
 public class AutonomousTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // Two diffy swerve modules
-        DiffySwerveModule m1 = new MySwerveModule(
+        DiffySwerveModule m1 = new MyDiffySwerveModule(
             4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_0"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_0")
         );
-        DiffySwerveModule m2 = new MySwerveModule(
+        DiffySwerveModule m2 = new MyDiffySwerveModule(
             -4, 0,
             hardwareMap.get(DcMotor.class, "dswerve_m0_1"),
             hardwareMap.get(DcMotor.class, "dswerve_m1_1")
